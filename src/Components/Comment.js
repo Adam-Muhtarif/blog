@@ -1,5 +1,5 @@
 import { MdOutlineDelete } from "react-icons/md";
-function Comment() {
+export default function Comment() {
   return (
     <div className="py-5">
       <div className="flex space-x-2">
@@ -7,6 +7,7 @@ function Comment() {
           <img
             className="h-12 w-12 rounded-full"
             src="https://www.shutterstock.com/image-photo/close-headshot-portrait-picture-smiling-600w-1733598437.jpg"
+            alt="avatar"
           />
         </div>
 
@@ -30,5 +31,3 @@ function Comment() {
     </div>
   );
 }
-
-export default Comment;

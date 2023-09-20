@@ -1,8 +1,16 @@
 import BlogCard from "../Components/BlogCard";
 import SideBar from "../Components/SideBar";
 import ListCard from "../Components/ListCard";
+import { useEffect } from "react";
 
-function Home() {
+export default function Home() {
+  useEffect(() => {
+    fetch("http://localhost:8000/api/blog")
+      .then((data) => data.json())
+      .then((allBlogs) => {
+        console.log(allBlogs);
+      });
+  }, []);
   return (
     <div className="flex justify-between space-x-8 mt-5">
       <SideBar />
@@ -25,5 +33,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

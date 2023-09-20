@@ -1,7 +1,7 @@
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDelete } from "react-icons/md";
 
-function BlogList() {
+export default function BlogList() {
   return (
     <div className="mt-5">
       <table className="table-auto w-full">
@@ -27,5 +27,3 @@ function BlogList() {
     </div>
   );
 }
-
-export default BlogList;

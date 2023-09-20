@@ -1,5 +1,4 @@
 import Header from "./Components/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Home from "./Pages/Home";
@@ -8,27 +7,24 @@ import Dashboard from "./Pages/Dashboard";
 import New from "./Pages/New";
 import Profile from "./Pages/Profile";
 import ChangePassword from "./Pages/ChangePassword";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
     <div>
-      <BrowserRouter>
-        <Header />
-        <div className="px-32 2xl:px-72 ">
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/new" element={<New />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/change" element={<ChangePassword />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <Header />
+      <div className="px-32 2xl:px-72 ">
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/new" element={<New />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/change" element={<ChangePassword />} />
+        </Routes>
+      </div>
     </div>
   );
 }
-
-export default App;

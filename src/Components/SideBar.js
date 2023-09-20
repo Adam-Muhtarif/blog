@@ -25,7 +25,9 @@ function SideBar() {
       <div className="py-5 space-y-1.5">
         <div className="flex items-center">
           <div className="w-6">🏠</div>
-          <h3 className="text-sm">Home</h3>
+          <Link to="/">
+            <h3 className="text-sm">Home</h3>
+          </Link>
         </div>
         <div className="flex items-center">
           <div className="w-6">📃</div>
