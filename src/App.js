@@ -18,7 +18,7 @@ export default function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:titleUrl" element={<Blog />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/new" element={<New />} />
           <Route path="/profile" element={<Profile />} />
