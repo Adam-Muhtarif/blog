@@ -20,7 +20,8 @@ export default function BlogComments({ comments, author }) {
           </button>
         </div>
       </div>
-
+      
+      {comments.length === 0 && <center>No Comments</center>}
       {comments.map((comment, i) => (
         <Comment key={i} comment={comment} />
       ))}

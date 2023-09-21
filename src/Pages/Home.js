@@ -2,15 +2,15 @@ import BlogCard from "../Components/BlogCard";
 import SideBar from "../Components/SideBar";
 import ListCard from "../Components/ListCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getAllBlogs } from "../Utils/ApiFetch";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function fetchApi(api) {
+  async function fetchApi() {
     try {
-      const response = await axios.get(api);
+      const response = await getAllBlogs();
       setBlogs(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetchApi("http://localhost:8000/api/blog");
+    fetchApi();
   }, []);
 
   if (loading) return;

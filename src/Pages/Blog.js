@@ -3,16 +3,15 @@ import BlogAuthor from "../Components/BlogAuthor";
 import BlogContent from "../Components/BlogContent";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getBlog } from "../Utils/ApiFetch";
 
 export default function Blog() {
   const { titleUrl } = useParams();
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState({});
-
-  async function fetchApi(api) {
+  async function fetchApi() {
     try {
-      const response = await axios.get(api);
+      const response = await getBlog(titleUrl);
       setBlog(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -21,7 +20,8 @@ export default function Blog() {
   }
 
   useEffect(() => {
-    fetchApi(`http://localhost:8000/api/blog/${titleUrl}`);
+    fetchApi();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [titleUrl]);
 
   if (loading) return;
