@@ -1,0 +1,43 @@
+/* Style for the overlay */
+.react-confirm-alert-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the dialog body */
+.react-confirm-alert-body {
+  text-align: center;
+}
+
+/* Style for the buttons container */
+.react-confirm-alert-button-group {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style For The Confirm Button */
+.react-confirm-alert-button-group button:first-of-type {
+  background-color: transparent;
+  border: 2px solid red;
+  color: red;
+  transition: background-color 0.3s;
+}
+.react-confirm-alert-button-group button:first-of-type:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Style For The Cancel Button */
+.react-confirm-alert-button-group button:last-of-type {
+  background-color: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+  transition: background-color 0.3s;
+}
+.react-confirm-alert-button-group button:last-of-type:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.react-confirm-alert-button:hover {
+  background-color: #0056b3;
+}

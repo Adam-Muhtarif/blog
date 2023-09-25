@@ -6,7 +6,10 @@ export default function BlogCard({ blog, author }) {
     <Link to={`/blog/${blog.titleUrl}`}>
       <div className="bg-white border rounded-md mb-4">
         <div>
-          <img className="rounded-t-md" src={blog.image} alt="blogImage" />
+          {/*
+          eslint-disable-next-line jsx-a11y/alt-text
+           */}
+          <img className="rounded-t-md" src={blog.image} />
         </div>
         <div className="flex space-x-3 p-6">
           <div className="h-12 w-12">

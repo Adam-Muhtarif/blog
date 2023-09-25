@@ -4,6 +4,7 @@ import BlogContent from "../Components/BlogContent";
 
 import { useEffect, useState } from "react";
 import { getBlog } from "../Utils/ApiFetch";
+import toast from "react-hot-toast";
 
 export default function Blog() {
   const { titleUrl } = useParams();
@@ -15,7 +16,8 @@ export default function Blog() {
       setBlog(response.data.data);
       setLoading(false);
     } catch (error) {
-      console.error(error.response.data.message);
+      toast.error("Error With Getting Blog Try Again Later")
+      console.error(error);
     }
   }
 

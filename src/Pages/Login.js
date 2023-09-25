@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { login } from "../Utils/ApiFetch";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useSignIn } from "react-auth-kit";
 
 export default function Login() {
   const [inputs, setInputs] = useState({});
   const inputRef = useRef(undefined);
+  const makeAuth = useSignIn();
   const navigate = useNavigate();
 
   useEffect(() => inputRef.current.focus(), []);
@@ -16,11 +18,17 @@ export default function Login() {
       if (!inputs.email || !inputs.pass)
         return toast.error("You Must Fill All Inputs");
 
-      await login(inputs);
-      toast.success("Welcome");
+      const response = await login(inputs);
+      makeAuth({
+        token: response.data.data.token,
+        expiresIn: 59,
+        authState: response.data.data,
+      });
+      toast.success(response.data.message);
       navigate("/");
     } catch (error) {
-      toast.error("Failed To Login Try Again Later");
+      toast.error("Email Or Password Is Wrong");
+      console.log(error.message);
     }
   }
 

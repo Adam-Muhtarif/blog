@@ -1,3 +1,6 @@
+import { Routes, Route } from "react-router-dom";
+import { RequireAuth } from "react-auth-kit";
+
 import Header from "./Components/Header";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -7,7 +10,6 @@ import Dashboard from "./Pages/Dashboard";
 import New from "./Pages/New";
 import Profile from "./Pages/Profile";
 import ChangePassword from "./Pages/ChangePassword";
-import { Routes, Route } from "react-router-dom";
 
 export default function App() {
   return (
@@ -19,10 +21,38 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blog/:titleUrl" element={<Blog />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/new" element={<New />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/change" element={<ChangePassword />} />
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth loginPath={"/login"}>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/new"
+            element={
+              <RequireAuth loginPath={"/login"}>
+                <New />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth loginPath={"/login"}>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/change"
+            element={
+              <RequireAuth loginPath={"/login"}>
+                <ChangePassword />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </div>
     </div>

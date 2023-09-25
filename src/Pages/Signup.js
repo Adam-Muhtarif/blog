@@ -1,11 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import { signup } from "../Utils/ApiFetch";
 import { useNavigate } from "react-router-dom";
+import { useSignIn } from "react-auth-kit";
 import toast from "react-hot-toast";
 
 export default function Signup() {
   const [inputs, setInputs] = useState({});
   const inputRefs = useRef({});
+  const makeAuth = useSignIn();
   const navigate = useNavigate();
 
   useEffect(() => inputRefs.current.focus(), []);
@@ -20,15 +22,20 @@ export default function Signup() {
         );
       }
 
-      // Send To Server
-      inputs.avatar = "";
-      await signup(inputs);
-
-      // Alert And Navigate
-      toast.success("Account Created Welcome");
+      // inputs.avatar = "";
+      const response = await signup(inputs);
+      makeAuth({
+        token: response.data.data.token,
+        expiresIn: 3600,
+        authState: response.data.data,
+      });
+      toast.success(response.data.message);
       navigate("/");
     } catch (error) {
-      toast.error("Failed To Create Account, Try Again Later");
+      error.response
+        ? toast.error(error.response.data.message)
+        : toast.error(error.message);
+      console.log(error.message);
     }
   }
 
@@ -93,8 +100,6 @@ export default function Signup() {
               onChange={(e) =>
                 setInputs({ ...inputs, avatar: e.target.files[0] })
               }
-              minLength={5}
-              required
             />
           </div>
         </div>

@@ -3,10 +3,13 @@ import SideBar from "../Components/SideBar";
 import ListCard from "../Components/ListCard";
 import { useEffect, useState } from "react";
 import { getAllBlogs } from "../Utils/ApiFetch";
+import toast from "react-hot-toast";
+import { useIsAuthenticated } from "react-auth-kit";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const isAuthenticated = useIsAuthenticated();
 
   async function fetchApi() {
     try {
@@ -14,7 +17,10 @@ export default function Home() {
       setBlogs(response.data.data);
       setLoading(false);
     } catch (error) {
-      console.error(error.response.data.message);
+      error.response
+        ? toast.error(error.response.data.message)
+        : toast.error(error.message);
+      console.log(error.message);
     }
   }
 
@@ -25,7 +31,7 @@ export default function Home() {
   if (loading) return;
   return (
     <div className="flex justify-between space-x-8 mt-5">
-      <SideBar />
+      {!isAuthenticated() && <SideBar />}
       <div className="flex-1">
         {blogs.map((blog, i) => (
           <BlogCard key={i} blog={blog} author={blog.author} />
