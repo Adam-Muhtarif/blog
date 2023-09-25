@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchApi();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

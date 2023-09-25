@@ -3,22 +3,42 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { postBlog } from "../Utils/ApiFetch";
 import { useNavigate } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import "../css/confirm-dialog.css";
 
 export default function New() {
   const auth = useAuthUser();
   const [inputs, setInputs] = useState({ author: auth()._id });
   const navigate = useNavigate();
+  const formData = new FormData();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handlePost() {
     if (!inputs.title || !inputs.body)
       return toast.error("Please fill in the missing information");
 
+    Object.entries(inputs).forEach(([key, value]) =>
+      formData.append(key, value)
+    );
     try {
-      inputs.image = undefined;
-      const response = await postBlog(inputs);
-      toast.success(response.data.message);
-      navigate(`/blog/${response.data.data.titleUrl}`);
+      toast.promise(
+        new Promise(async (res, rej) => {
+          return await postBlog(formData)
+            .then((response) => {
+              navigate(`/blog/${response.data.data.titleUrl}`);
+              res();
+            })
+            .catch((error) => {
+              rej(error);
+              console.log(error);
+            });
+        }),
+        {
+          loading: "Publishing...",
+          success: <b>Blog Published</b>,
+          error: <b>Could not published, Try Again Later</b>,
+        }
+      );
     } catch (error) {
       error.response
         ? toast.error(error.response.data.message)
@@ -27,8 +47,26 @@ export default function New() {
     }
   }
 
+  function handlePostConfirmation(e) {
+    e.preventDefault();
+    confirmAlert({
+      title: "Publishing",
+      message: "Are you sure you want to publish this blog?",
+      buttons: [
+        {
+          label: "Cancel",
+          onClick: () => {},
+        },
+        {
+          label: "Confirm Post",
+          onClick: () => handlePost(),
+        },
+      ],
+    });
+  }
+
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handlePostConfirmation(e)}>
       <div className="m-auto w-1/2 mt-5 p-5 bg-white rounded-md">
         <h2 className="mb-8 text-center font-bold text-2xl">Blog post</h2>
         <input
