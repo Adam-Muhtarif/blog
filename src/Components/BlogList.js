@@ -30,34 +30,27 @@ export default function BlogList({ blogs }) {
   }
 
   async function handleDelete(userId, blogId, rowId) {
-    try {
-      toast.promise(
-        new Promise((res, rej) => {
-          deleteBlog(userId, blogId)
-            .then(() => {
-              rows.current.forEach((row) => {
-                if (Number(row.id) === rowId) {
-                  row.remove();
-                }
-              });
-              res();
-            })
-            .catch((error) => {
-              rej(error);
+    toast.promise(
+      new Promise((res, rej) => {
+        deleteBlog(userId, blogId)
+          .then(() => {
+            rows.current.forEach((row) => {
+              if (Number(row.id) === rowId) {
+                row.remove();
+              }
             });
-        }),
-        {
-          loading: "Deleting...",
-          success: <b>Blog Deleted</b>,
-          error: <b>Could not delete, Try Again Later</b>,
-        }
-      );
-    } catch (error) {
-      error.response
-        ? toast.error(error.response.data.message)
-        : toast.error(error.message);
-      console.log(error.message);
-    }
+            res();
+          })
+          .catch((error) => {
+            rej(error);
+          });
+      }),
+      {
+        loading: "Deleting...",
+        success: <b>Blog Deleted</b>,
+        error: <b>Could not delete, Try Again Later</b>,
+      }
+    );
   }
 
   return (

@@ -8,29 +8,48 @@ export default function Signup() {
   const [inputs, setInputs] = useState({});
   const inputRefs = useRef({});
   const makeAuth = useSignIn();
+  const formData = new FormData();
   const navigate = useNavigate();
 
   useEffect(() => inputRefs.current.focus(), []);
 
   async function handleSubmit(e) {
-    try {
-      e.preventDefault();
-      const { firstName, secondName, email, pass } = inputs;
-      if (!firstName || !secondName || !email || pass.length < 5) {
-        return console.log(
-          "All Fields Must Filled And Password Must be More Than 5"
-        );
-      }
+    e.preventDefault();
 
-      // inputs.avatar = "";
-      const response = await signup(inputs);
-      makeAuth({
-        token: response.data.data.token,
-        expiresIn: 3600,
-        authState: response.data.data,
-      });
-      toast.success(response.data.message);
-      navigate("/");
+    const { firstName, secondName, email, pass } = inputs;
+    if (!firstName || !secondName || !email || pass.length < 5) {
+      return console.log(
+        "All Fields Must Filled And Password Must be More Than 5"
+      );
+    }
+
+    Object.entries(inputs).forEach(([key, value]) =>
+      formData.append(key, value)
+    );
+    try {
+      toast.promise(
+        new Promise(async (res, rej) => {
+          return await signup(formData)
+            .then((response) => {
+              makeAuth({
+                token: response.data.data.token,
+                expiresIn: 3600,
+                authState: response.data.data,
+              });
+              navigate(`/`);
+              res();
+            })
+            .catch((error) => {
+              rej(error);
+              console.log(error);
+            });
+        }),
+        {
+          loading: "Creating Your Account...",
+          success: <b>Welcome {inputs.firstName}</b>,
+          error: <b>Could not create account, Try Again Later</b>,
+        }
+      );
     } catch (error) {
       error.response
         ? toast.error(error.response.data.message)

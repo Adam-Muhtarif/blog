@@ -20,31 +20,25 @@ export default function New() {
     Object.entries(inputs).forEach(([key, value]) =>
       formData.append(key, value)
     );
-    try {
-      toast.promise(
-        new Promise(async (res, rej) => {
-          return await postBlog(formData)
-            .then((response) => {
-              navigate(`/blog/${response.data.data.titleUrl}`);
-              res();
-            })
-            .catch((error) => {
-              rej(error);
-              console.log(error);
-            });
-        }),
-        {
-          loading: "Publishing...",
-          success: <b>Blog Published</b>,
-          error: <b>Could not published, Try Again Later</b>,
-        }
-      );
-    } catch (error) {
-      error.response
-        ? toast.error(error.response.data.message)
-        : toast.error(error.message);
-      console.log(error.message);
-    }
+
+    toast.promise(
+      new Promise(async (res, rej) => {
+        return await postBlog(formData)
+          .then((response) => {
+            navigate(`/blog/${response.data.data.titleUrl}`);
+            res();
+          })
+          .catch((error) => {
+            rej(error);
+            console.log(error);
+          });
+      }),
+      {
+        loading: "Publishing...",
+        success: <b>Blog Published</b>,
+        error: <b>Could not published, Try Again Later</b>,
+      }
+    );
   }
 
   function handlePostConfirmation(e) {
