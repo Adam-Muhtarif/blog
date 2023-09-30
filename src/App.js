@@ -38,6 +38,14 @@ export default function App() {
             }
           />
           <Route
+            path="/update/:titleUrl"
+            element={
+              <RequireAuth loginPath={"/login"}>
+                <New />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/profile"
             element={
               <RequireAuth loginPath={"/login"}>
@@ -46,7 +54,7 @@ export default function App() {
             }
           />
           <Route
-            path="/change"
+            path="/change-password"
             element={
               <RequireAuth loginPath={"/login"}>
                 <ChangePassword />

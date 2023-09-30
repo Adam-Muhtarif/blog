@@ -1,44 +1,25 @@
 import { useAuthUser } from "react-auth-kit";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDelete } from "react-icons/md";
-import { useRef } from "react";
-import { deleteBlog } from "../Utils/ApiFetch";
+import { useEffect, useState } from "react";
+import { deleteBlog, getUserBlogs } from "../Utils/ApiFetch";
 import { confirmAlert } from "react-confirm-alert";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../css/confirm-dialog.css";
 
-export default function BlogList({ blogs }) {
+export default function BlogList() {
+  const [userBlogs, setUserBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const auth = useAuthUser();
-  const rows = useRef([]);
 
-  function handleDeleteConfirmation(userId, blogId, rowId) {
-    confirmAlert({
-      title: "Confirm Delete",
-      message: "Are you sure you want to delete this blog?",
-      buttons: [
-        {
-          label: "Confirm Delete",
-          onClick: () => handleDelete(userId, blogId, rowId),
-        },
-        {
-          label: "Cancel",
-          onClick: () => {},
-        },
-      ],
-    });
-  }
-
-  async function handleDelete(userId, blogId, rowId) {
+  async function handleDelete(blogId) {
     toast.promise(
       new Promise((res, rej) => {
-        deleteBlog(userId, blogId)
+        deleteBlog(auth()._id, blogId)
           .then(() => {
-            rows.current.forEach((row) => {
-              if (Number(row.id) === rowId) {
-                row.remove();
-              }
-            });
+            fetchBlogs();
             res();
           })
           .catch((error) => {
@@ -53,6 +34,42 @@ export default function BlogList({ blogs }) {
     );
   }
 
+  function handleDeleteConfirmation(userId, blogId) {
+    confirmAlert({
+      title: "Confirm Delete",
+      message: "Are you sure you want to delete this blog?",
+      buttons: [
+        {
+          label: "Confirm Delete",
+          onClick: () => handleDelete(userId, blogId),
+        },
+        {
+          label: "Cancel",
+          onClick: () => {},
+        },
+      ],
+    });
+  }
+
+  async function fetchBlogs() {
+    try {
+      const response = await getUserBlogs(auth()._id);
+      setUserBlogs(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      error.response
+        ? toast.error(error.response.data.message)
+        : toast.error(error.message);
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) return;
   return (
     <div className="mt-5">
       <table className="table-auto w-full">
@@ -68,27 +85,21 @@ export default function BlogList({ blogs }) {
           </tr>
         </thead>
         <tbody>
-          {blogs.map((blog, i) => (
-            <tr
-              key={i}
-              id={i}
-              className="border-y h-10"
-              ref={(ref) => (rows.current[i] = ref)}
-            >
+          {userBlogs.map((blog, i) => (
+            <tr key={i} className="border-y h-10">
               <td>{blog.title}</td>
               <td>
                 <center>
-                  <CiEdit className="text-blue-300 hover:text-blue-800 transition hover:cursor-pointer  " />
+                  <Link to={`/update/${blog.titleUrl}`}>
+                    <CiEdit className="text-blue-300 hover:text-blue-800 transition hover:cursor-pointer  " />
+                  </Link>
                 </center>
               </td>
               <td>
                 <center>
                   <MdOutlineDelete
                     className="text-red-300 hover:text-red-500 transition hover:cursor-pointer hover:scale-200"
-                    id={blog._id}
-                    onClick={(e) =>
-                      handleDeleteConfirmation(auth()._id, e.target.id, i)
-                    }
+                    onClick={() => handleDeleteConfirmation(blog._id)}
                   />
                 </center>
               </td>

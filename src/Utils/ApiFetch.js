@@ -11,7 +11,15 @@ export async function login(body) {
 }
 
 export async function getUser(userId) {
-  return await axios.get(`${baseUrl}/user/:${userId}`);
+  return await axios.get(`${baseUrl}/user/${userId}`);
+}
+
+export async function updateProfile(body) {
+  return await axios.put(`${baseUrl}/user/update`, body);
+}
+
+export async function changePassword(body) {
+  return await axios.put(`${baseUrl}/user/change-password`, body);
 }
 
 // Blog
@@ -33,4 +41,8 @@ export async function getUserBlogs(userId) {
 
 export async function deleteBlog(userId, blogId) {
   return await axios.delete(`${baseUrl}/blog/delete/${userId}/${blogId}`);
+}
+
+export async function updateBlog(body) {
+  return await axios.put(`${baseUrl}/blog/update`, body);
 }
