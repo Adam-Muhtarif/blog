@@ -51,7 +51,6 @@ export default function New() {
     );
   }
 
-  //* Confirm Dialog
   function handlePostConfirmation(e) {
     e.preventDefault();
 

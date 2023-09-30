@@ -46,3 +46,12 @@ export async function deleteBlog(userId, blogId) {
 export async function updateBlog(body) {
   return await axios.put(`${baseUrl}/blog/update`, body);
 }
+
+// Comment
+export async function makeComment(body) {
+  return await axios.post(`${baseUrl}/comment/create`, body);
+}
+
+export async function deleteComment(authorId, commentId) {
+  return await axios.delete(`${baseUrl}/comment/delete/${authorId}/${commentId}`);
+}

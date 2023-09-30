@@ -9,6 +9,7 @@ export default function Blog() {
   const { titleUrl } = useParams();
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState({});
+
   async function fetchBlog() {
     try {
       const response = await getBlog(titleUrl);
