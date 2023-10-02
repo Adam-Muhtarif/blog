@@ -33,7 +33,7 @@ export default function Blog() {
     );
   }
 
-  async function handleDelete(authorId, commentId) {
+  async function handleDeleteComment(authorId, commentId) {
     toast.promise(
       new Promise(async (res, rej) => {
         await deleteComment(authorId, commentId)
@@ -74,8 +74,8 @@ export default function Blog() {
   return (
     <div className="flex my-5 space-x-5">
       <BlogContent
-        deleteComment={handleDelete}
-        makeComment={handleMakeComment}
+        handleDeleteComment={handleDeleteComment}
+        handleMakeComment={handleMakeComment}
         blog={blog}
       />
       <BlogAuthor author={blog.author} />

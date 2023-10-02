@@ -1,11 +1,16 @@
 import BlogComments from "./BlogComments";
+import dateFormat from "dateformat";
 
-export default function BlogContent({ blog, makeComment, deleteComment }) {
+export default function BlogContent({
+  blog,
+  handleMakeComment,
+  handleDeleteComment,
+}) {
   return (
     <div className="flex-1">
       <div className="bg-white rounded-md">
         <div>
-          <img className="rounded-t-md" src={blog.image} alt="blogImage" />
+          <img className="rounded-t-md" src={blog.image} alt="" />
         </div>
         <div className="py-5 px-16">
           <div className="flex items-center space-x-3 py-3">
@@ -18,7 +23,9 @@ export default function BlogContent({ blog, makeComment, deleteComment }) {
             </div>
             <div className="leading-4">
               <h4>{blog.author.firstName}</h4>
-              <small className="text-gray-400">Jan 12</small>
+              <small className="text-gray-400">
+                {dateFormat(blog.postDate, "d mmm yy")}
+              </small>
             </div>
           </div>
           <h3 className="font-bold text-5xl hover:text-sky-600">
@@ -29,9 +36,9 @@ export default function BlogContent({ blog, makeComment, deleteComment }) {
 
         <BlogComments
           comments={blog.comments}
-          avatar={blog.author.avatar}
-          makeComment={makeComment}
-          deleteComment={deleteComment}
+          blogAuthor={blog.author}
+          handleMakeComment={handleMakeComment}
+          handleDeleteComment={handleDeleteComment}
         />
       </div>
     </div>

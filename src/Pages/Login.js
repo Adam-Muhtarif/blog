@@ -1,39 +1,56 @@
 import { useEffect, useRef, useState } from "react";
 import { login } from "../Utils/ApiFetch";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Login() {
-  const [inputs, setInputs] = useState({});
-  const inputRef = useRef(undefined);
+  const emailRef = useRef();
+  const [loginInputs, setLoginInputs] = useState({});
   const makeAuth = useSignIn();
   const navigate = useNavigate();
 
-  useEffect(() => inputRef.current.focus(), []);
+  useEffect(() => emailRef.current.focus(), []);
 
-  async function handleSubmit(e) {
+  async function handleLogin(e) {
+    e.preventDefault();
+    if (!loginInputs.email || !loginInputs.pass)
+      return toast.error("Please provide your email and password");
+
     try {
-      e.preventDefault();
-      if (!inputs.email || !inputs.pass)
-        return toast.error("You Must Fill All Inputs");
-
-      const response = await login(inputs);
-      makeAuth({
-        token: response.data.data.token,
-        expiresIn: 59,
-        authState: response.data.data,
-      });
-      toast.success(response.data.message);
-      navigate("/");
+      toast.promise(
+        new Promise(async (res, rej) => {
+          return await login(loginInputs)
+            .then((response) => {
+              makeAuth({
+                token: response.data.data.token,
+                expiresIn: 3600,
+                authState: response.data.data,
+              });
+              navigate(`/`);
+              res(response);
+            })
+            .catch((error) => {
+              rej(error);
+              console.log(error.message);
+            });
+        }),
+        {
+          loading: "Logging in ...",
+          success: (response) => <b>{response.data.message}</b>,
+          error: (error) => <b>{error.response.data.message}</b>,
+        }
+      );
     } catch (error) {
-      toast.error("Email Or Password Is Wrong");
+      error.response
+        ? toast.error(error.response.data.message)
+        : toast.error("Error with login");
       console.log(error.message);
     }
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleLogin(e)}>
       <div className="bg-white m-auto mt-10 rounded-md p-10 w-[650px] ">
         <div className="text-center">
           <h3 className="font-bold text-2xl">Welcome to DEV Community 👩‍💻👨‍💻</h3>
@@ -47,8 +64,10 @@ export default function Login() {
             <input
               className="border border-gray-300 p-2 rounded-md"
               type="email"
-              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-              ref={inputRef}
+              onChange={(e) =>
+                setLoginInputs({ ...loginInputs, email: e.target.value })
+              }
+              ref={emailRef}
               required
             />
           </div>
@@ -57,7 +76,9 @@ export default function Login() {
             <input
               className="border border-gray-300 p-2 rounded-md"
               type="password"
-              onChange={(e) => setInputs({ ...inputs, pass: e.target.value })}
+              onChange={(e) =>
+                setLoginInputs({ ...loginInputs, pass: e.target.value })
+              }
               required
             />
           </div>

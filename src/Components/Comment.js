@@ -1,8 +1,9 @@
 import { useAuthUser } from "react-auth-kit";
 import { MdOutlineDelete } from "react-icons/md";
 import { confirmAlert } from "react-confirm-alert";
+import dateFormat from "dateformat";
 
-export default function Comment({ comments, deleteComment }) {
+export default function Comment({ comments, handleDeleteComment }) {
   const auth = useAuthUser();
 
   function handleDeleteConfirmation(commentId) {
@@ -12,7 +13,7 @@ export default function Comment({ comments, deleteComment }) {
       buttons: [
         {
           label: "Confirm",
-          onClick: () => deleteComment(auth()._id, commentId),
+          onClick: () => handleDeleteComment(auth()._id, commentId),
         },
         {
           label: "Cancel",
@@ -38,12 +39,14 @@ export default function Comment({ comments, deleteComment }) {
             <div>
               <div className="flex items-center space-x-1">
                 <h2>{comment.authorId.firstName}</h2>
-                <h2 className="text-gray-500">{comment.date}</h2>
+                <h2 className="text-gray-500">
+                  {dateFormat(comment.date, "d mmm yy")}
+                </h2>
               </div>
               <p className="text-lg py-2">{comment.body}</p>
             </div>
             <div>
-              {auth()?.id === comment.authorId._id && (
+              {auth()?._id === comment.authorId._id && (
                 <button
                   className="bg-red-600 py-2 px-2 rounded-md text-white mt-2"
                   onClick={(e) => {

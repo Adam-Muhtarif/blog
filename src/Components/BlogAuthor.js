@@ -1,3 +1,5 @@
+import dateFormat from "dateformat";
+
 export default function BlogAuthor({ author }) {
   return (
     <div className="basis-1/4 bg-white rounded-md h-fit">
@@ -31,7 +33,7 @@ export default function BlogAuthor({ author }) {
           )}
           <div>
             <h3 className="font-bold text-gray-500">Joined</h3>
-            <h3>{author.joinDate}</h3>
+            <h3>{dateFormat(author.joinDate, "d mmm yyyy")}</h3>
           </div>
         </div>
       </div>

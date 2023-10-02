@@ -1,10 +1,10 @@
-import BlogCard from "../Components/BlogCard";
-import SideBar from "../Components/SideBar";
-import ListCard from "../Components/ListCard";
 import { useEffect, useState } from "react";
 import { getAllBlogs } from "../Utils/ApiFetch";
-import toast from "react-hot-toast";
 import { useIsAuthenticated } from "react-auth-kit";
+import toast from "react-hot-toast";
+import SideBar from "../Components/SideBar";
+import BlogCard from "../Components/BlogCard";
+import ListCard from "../Components/ListCard";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
@@ -34,7 +34,7 @@ export default function Home() {
       {!isAuthenticated() && <SideBar />}
       <div className="flex-1">
         {blogs.map((blog, i) => (
-          <BlogCard key={i} blog={blog} author={blog.author} />
+          <BlogCard key={i} blog={blog} />
         ))}
       </div>
       <div className="w-[25%]">
@@ -43,8 +43,6 @@ export default function Home() {
             <h3 className="font-bold">Listings</h3>
             <small className="text-blue-700 font-semibold">See all</small>
           </div>
-          <ListCard />
-          <ListCard />
           <ListCard />
           <ListCard />
         </div>

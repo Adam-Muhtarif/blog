@@ -70,6 +70,12 @@ export default function BlogList() {
   }, []);
 
   if (loading) return;
+  if (userBlogs.length === 0)
+    return (
+      <center>
+        You haven't published any blogs yet. Try creating your first blog
+      </center>
+    );
   return (
     <div className="mt-5">
       <table className="table-auto w-full">

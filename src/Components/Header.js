@@ -1,6 +1,5 @@
-// import { MdSearch } from "react-icons/md";
-import { useIsAuthenticated, useAuthUser } from "react-auth-kit";
 import { Link } from "react-router-dom";
+import { useIsAuthenticated, useAuthUser } from "react-auth-kit";
 
 export default function Header() {
   const isAuthenticated = useIsAuthenticated();

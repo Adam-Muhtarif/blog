@@ -5,27 +5,28 @@ import { useSignIn } from "react-auth-kit";
 import toast from "react-hot-toast";
 
 export default function Signup() {
-  const [inputs, setInputs] = useState({});
-  const inputRefs = useRef({});
+  const firstNameRef = useRef();
+  const [signUpContent, setSignUpContent] = useState({});
   const makeAuth = useSignIn();
   const formData = new FormData();
   const navigate = useNavigate();
 
-  useEffect(() => inputRefs.current.focus(), []);
+  useEffect(() => firstNameRef.current.focus(), []);
 
-  async function handleSubmit(e) {
+  async function handleSignUp(e) {
     e.preventDefault();
 
-    const { firstName, secondName, email, pass } = inputs;
+    const { firstName, secondName, email, pass } = signUpContent;
     if (!firstName || !secondName || !email || pass.length < 5) {
-      return console.log(
-        "All Fields Must Filled And Password Must be More Than 5"
+      return toast.error(
+        "Please fill in all required fields and password must be at least than 5 chars"
       );
     }
 
-    Object.entries(inputs).forEach(([key, value]) =>
+    Object.entries(signUpContent).forEach(([key, value]) =>
       formData.append(key, value)
     );
+
     try {
       toast.promise(
         new Promise(async (res, rej) => {
@@ -37,17 +38,17 @@ export default function Signup() {
                 authState: response.data.data,
               });
               navigate(`/`);
-              res();
+              res(response);
             })
             .catch((error) => {
               rej(error);
-              console.log(error);
+              console.log(error.message);
             });
         }),
         {
           loading: "Creating Your Account...",
-          success: <b>Welcome {inputs.firstName}</b>,
-          error: <b>Could not create account, Try Again Later</b>,
+          success: (response) => <b>{response.data.message}</b>,
+          error: (error) => <b>{error.response.data.message}</b>,
         }
       );
     } catch (error) {
@@ -59,7 +60,7 @@ export default function Signup() {
   }
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSignUp(e)}>
       <div className="bg-white m-auto mt-10 rounded-md p-10 w-[650px] ">
         <div className="text-center">
           <h3 className="font-bold text-2xl">Welcome to DEV Community 👩‍💻👨‍💻</h3>
@@ -74,9 +75,12 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="text"
               onChange={(e) =>
-                setInputs({ ...inputs, firstName: e.target.value })
+                setSignUpContent({
+                  ...signUpContent,
+                  firstName: e.target.value,
+                })
               }
-              ref={inputRefs}
+              ref={firstNameRef}
               required
             />
           </div>
@@ -86,7 +90,10 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="text"
               onChange={(e) =>
-                setInputs({ ...inputs, secondName: e.target.value })
+                setSignUpContent({
+                  ...signUpContent,
+                  secondName: e.target.value,
+                })
               }
               required
             />
@@ -96,7 +103,9 @@ export default function Signup() {
             <input
               className="border border-gray-300 p-2 rounded-md"
               type="email"
-              onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+              onChange={(e) =>
+                setSignUpContent({ ...signUpContent, email: e.target.value })
+              }
               required
             />
           </div>
@@ -105,7 +114,9 @@ export default function Signup() {
             <input
               className="border border-gray-300 p-2 rounded-md"
               type="password"
-              onChange={(e) => setInputs({ ...inputs, pass: e.target.value })}
+              onChange={(e) =>
+                setSignUpContent({ ...signUpContent, pass: e.target.value })
+              }
               minLength={5}
               required
             />
@@ -117,7 +128,10 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="file"
               onChange={(e) =>
-                setInputs({ ...inputs, avatar: e.target.files[0] })
+                setSignUpContent({
+                  ...signUpContent,
+                  avatar: e.target.files[0],
+                })
               }
             />
           </div>
