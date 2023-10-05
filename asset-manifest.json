@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Adam-Muhtarif/blog/static/css/main.074b70fd.css",
-    "main.js": "/Adam-Muhtarif/blog/static/js/main.94660b8c.js",
-    "index.html": "/Adam-Muhtarif/blog/index.html",
-    "main.074b70fd.css.map": "/Adam-Muhtarif/blog/static/css/main.074b70fd.css.map",
-    "main.94660b8c.js.map": "/Adam-Muhtarif/blog/static/js/main.94660b8c.js.map"
+    "main.css": "/blog/static/css/main.074b70fd.css",
+    "main.js": "/blog/static/js/main.94660b8c.js",
+    "index.html": "/blog/index.html",
+    "main.074b70fd.css.map": "/blog/static/css/main.074b70fd.css.map",
+    "main.94660b8c.js.map": "/blog/static/js/main.94660b8c.js.map"
   },
   "entrypoints": [
     "static/css/main.074b70fd.css",
