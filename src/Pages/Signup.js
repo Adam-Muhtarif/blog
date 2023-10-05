@@ -6,24 +6,27 @@ import toast from "react-hot-toast";
 
 export default function Signup() {
   const firstNameRef = useRef();
-  const [signUpContent, setSignUpContent] = useState({});
+  const [signUpInputs, setSignUpInputs] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null);
   const makeAuth = useSignIn();
   const formData = new FormData();
   const navigate = useNavigate();
 
-  useEffect(() => firstNameRef.current.focus(), []);
+  function handleAvatarChange(image) {
+    setSelectedImage(URL.createObjectURL(image));
+  }
 
   async function handleSignUp(e) {
     e.preventDefault();
 
-    const { firstName, secondName, email, pass } = signUpContent;
+    const { firstName, secondName, email, pass } = signUpInputs;
     if (!firstName || !secondName || !email || pass.length < 5) {
       return toast.error(
         "Please fill in all required fields and password must be at least than 5 chars"
       );
     }
 
-    Object.entries(signUpContent).forEach(([key, value]) =>
+    Object.entries(signUpInputs).forEach(([key, value]) =>
       formData.append(key, value)
     );
 
@@ -59,6 +62,7 @@ export default function Signup() {
     }
   }
 
+  useEffect(() => firstNameRef.current.focus(), []);
   return (
     <form onSubmit={(e) => handleSignUp(e)}>
       <div className="bg-white m-auto mt-10 rounded-md p-10 w-[650px] ">
@@ -75,8 +79,8 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="text"
               onChange={(e) =>
-                setSignUpContent({
-                  ...signUpContent,
+                setSignUpInputs({
+                  ...signUpInputs,
                   firstName: e.target.value,
                 })
               }
@@ -90,8 +94,8 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="text"
               onChange={(e) =>
-                setSignUpContent({
-                  ...signUpContent,
+                setSignUpInputs({
+                  ...signUpInputs,
                   secondName: e.target.value,
                 })
               }
@@ -104,7 +108,7 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="email"
               onChange={(e) =>
-                setSignUpContent({ ...signUpContent, email: e.target.value })
+                setSignUpInputs({ ...signUpInputs, email: e.target.value })
               }
               required
             />
@@ -115,7 +119,7 @@ export default function Signup() {
               className="border border-gray-300 p-2 rounded-md"
               type="password"
               onChange={(e) =>
-                setSignUpContent({ ...signUpContent, pass: e.target.value })
+                setSignUpInputs({ ...signUpInputs, pass: e.target.value })
               }
               minLength={5}
               required
@@ -127,13 +131,15 @@ export default function Signup() {
               name="avatar"
               className="border border-gray-300 p-2 rounded-md"
               type="file"
-              onChange={(e) =>
-                setSignUpContent({
-                  ...signUpContent,
+              onChange={(e) => {
+                setSignUpInputs({
+                  ...signUpInputs,
                   avatar: e.target.files[0],
-                })
-              }
+                });
+                handleAvatarChange(e.target.files[0]);
+              }}
             />
+            <img className="w-40 mt-3 mx-auto" src={selectedImage} alt="" />
           </div>
         </div>
         <div className="mt-2">

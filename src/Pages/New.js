@@ -3,17 +3,24 @@ import { useEffect, useState } from "react";
 import { getBlog, postBlog, updateBlog } from "../Utils/ApiFetch";
 import { confirmAlert } from "react-confirm-alert";
 import toast from "react-hot-toast";
+import UpdateBlogLoader from "../Loading/updateBlogLoader";
+import { useAuthUser } from "react-auth-kit";
+
 // import "react-confirm-alert/src/react-confirm-alert.css";
 // import "../css/confirm-dialog.css";
-import { useAuthUser } from "react-auth-kit";
 
 export default function New() {
   const { titleUrl } = useParams();
   const auth = useAuthUser();
   const [inputs, setInputs] = useState({ author: auth()._id });
+  const [selectedImage, setSelectedImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const formData = new FormData();
+
+  function handleAvatarChange(image) {
+    setSelectedImage(URL.createObjectURL(image));
+  }
 
   async function handlePostUpdate() {
     Object.entries(inputs).forEach(([key, value]) =>
@@ -96,15 +103,19 @@ export default function New() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return;
+  if (loading) return <UpdateBlogLoader />;
   return (
     <form onSubmit={(e) => handlePostConfirmation(e)}>
-      <div className="m-auto w-1/2 mt-5 p-5 bg-white rounded-md">
+      <div className="m-auto  mt-5 p-5 bg-white rounded-md">
         <h2 className="mb-8 text-center font-bold text-2xl">Blog post</h2>
         <input
           type="file"
-          onChange={(e) => setInputs({ ...inputs, image: e.target.files[0] })}
+          onChange={(e) => {
+            setInputs({ ...inputs, image: e.target.files[0] });
+            handleAvatarChange(e.target.files[0]);
+          }}
         />
+        <img className="mx-auto lg:h-60" src={selectedImage || inputs.image} alt="" />
         <div className="my-2">
           <input
             defaultValue={inputs.title}
