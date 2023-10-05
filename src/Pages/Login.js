@@ -24,7 +24,7 @@ export default function Login() {
             .then((response) => {
               makeAuth({
                 token: response.data.data.token,
-                expiresIn: 3600,
+                expiresIn: 59,
                 authState: response.data.data,
               });
               navigate(`/`);

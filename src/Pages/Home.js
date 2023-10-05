@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import SideBar from "../Components/SideBar";
 import BlogCard from "../Components/BlogCard";
 import ListCard from "../Components/ListCard";
+import HomeLoader from "../Loading/HomeLoader";
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
@@ -28,7 +29,7 @@ export default function Home() {
     fetchApi();
   }, []);
 
-  if (loading) return;
+  if (loading) return <HomeLoader />;
   return (
     <div className="flex justify-between space-x-8 mt-5">
       {!isAuthenticated() && <SideBar />}

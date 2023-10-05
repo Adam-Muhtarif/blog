@@ -4,6 +4,7 @@ import { deleteComment, getBlog, makeComment } from "../Utils/ApiFetch";
 import BlogContent from "../Components/BlogContent";
 import BlogAuthor from "../Components/BlogAuthor";
 import toast from "react-hot-toast";
+import BlogLoader from "../Loading/BlogLoader";
 
 export default function Blog() {
   const { titleUrl } = useParams();
@@ -70,7 +71,7 @@ export default function Blog() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return;
+  if (loading) return <BlogLoader />;
   return (
     <div className="flex my-5 space-x-5">
       <BlogContent

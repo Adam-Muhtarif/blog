@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { getBlog, postBlog, updateBlog } from "../Utils/ApiFetch";
 import { confirmAlert } from "react-confirm-alert";
 import toast from "react-hot-toast";
-import "react-confirm-alert/src/react-confirm-alert.css";
-import "../css/confirm-dialog.css";
+// import "react-confirm-alert/src/react-confirm-alert.css";
+// import "../css/confirm-dialog.css";
 import { useAuthUser } from "react-auth-kit";
 
 export default function New() {
-  const auth = useAuthUser();
   const { titleUrl } = useParams();
+  const auth = useAuthUser();
   const [inputs, setInputs] = useState({ author: auth()._id });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const formData = new FormData();
 
@@ -87,10 +87,12 @@ export default function New() {
   }
 
   useEffect(() => {
+    // The fetch works when we updating blog
     if (titleUrl) {
-      setLoading(true);
       fetchBlog();
-    }
+
+      // Stop loading when posting new blog
+    } else setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

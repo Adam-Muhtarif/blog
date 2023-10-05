@@ -16,13 +16,13 @@ export default function BlogComments({
   return (
     <div className="border-t py-5 px-16">
       <h1 className="font-bold text-2xl">Top comment(s)</h1>
-      {auth()?._id !== blogAuthor._id && (
+      {auth() && auth()._id !== blogAuthor._id && (
         <div className="py-5">
           <div className="flex space-x-2">
             <div className="h-12 w-12">
               <img
                 className="rounded-full"
-                src={blogAuthor.avatar}
+                src={auth()?.avatar}
                 alt="avatar"
               />
             </div>

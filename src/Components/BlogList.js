@@ -1,18 +1,19 @@
+import { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDelete } from "react-icons/md";
-import { useEffect, useState } from "react";
 import { deleteBlog, getUserBlogs } from "../Utils/ApiFetch";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../css/confirm-dialog.css";
+import BlogListLoader from "../Loading/BlogListLoader";
 
 export default function BlogList() {
+  const auth = useAuthUser();
   const [userBlogs, setUserBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const auth = useAuthUser();
 
   async function handleDelete(blogId) {
     toast.promise(
@@ -69,10 +70,10 @@ export default function BlogList() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (loading) return;
+  if (loading) return <BlogListLoader />;
   if (userBlogs.length === 0)
     return (
-      <center>
+      <center className="text-sm my-2">
         You haven't published any blogs yet. Try creating your first blog
       </center>
     );
