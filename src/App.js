@@ -10,12 +10,13 @@ import Dashboard from "./Pages/Dashboard";
 import New from "./Pages/New";
 import Profile from "./Pages/Profile";
 import ChangePassword from "./Pages/ChangePassword";
+import NotFound from "./Pages/NotFound";
 
 export default function App() {
   return (
     <div>
       <Header />
-      <div className="px-32 2xl:px-72 ">
+      <div className="px-32 2xl:px-72">
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -61,6 +62,7 @@ export default function App() {
               </RequireAuth>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </div>
