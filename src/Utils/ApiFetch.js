@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = "https://blog-api-18lm.onrender.com/api";
 
 // User
 export async function signup(body) {
