@@ -19,7 +19,7 @@ export default function App() {
       <div className="px-32 2xl:px-72">
         <Routes>
           <Route exact path="blog/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/blog/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blog/:titleUrl" element={<Blog />} />
           <Route
