@@ -18,46 +18,46 @@ export default function App() {
       <Header />
       <div className="px-32 2xl:px-72">
         <Routes>
-          <Route exact path="/blog/" element={<Home />} />
-          <Route path="/blog/login" element={<Login />} />
-          <Route path="/blog/signup" element={<Signup />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/blog/:titleUrl" element={<Blog />} />
           <Route
-            path="/blog/dashboard"
+            path="/dashboard"
             element={
-              <RequireAuth loginPath={"/blog/login"}>
+              <RequireAuth loginPath={"/login"}>
                 <Dashboard />
               </RequireAuth>
             }
           />
           <Route
-            path="/blog/new"
+            path="/new"
             element={
-              <RequireAuth loginPath={"/blog/login"}>
+              <RequireAuth loginPath={"/login"}>
                 <New />
               </RequireAuth>
             }
           />
           <Route
-            path="/blog/update/:titleUrl"
+            path="/update/:titleUrl"
             element={
-              <RequireAuth loginPath={"/blog/login"}>
+              <RequireAuth loginPath={"/login"}>
                 <New />
               </RequireAuth>
             }
           />
           <Route
-            path="/blog/profile"
+            path="/profile"
             element={
-              <RequireAuth loginPath={"/blog/login"}>
+              <RequireAuth loginPath={"/login"}>
                 <Profile />
               </RequireAuth>
             }
           />
           <Route
-            path="/blog/change-password"
+            path="/change-password"
             element={
-              <RequireAuth loginPath={"/blog/login"}>
+              <RequireAuth loginPath={"/login"}>
                 <ChangePassword />
               </RequireAuth>
             }
