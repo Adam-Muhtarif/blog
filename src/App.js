@@ -20,44 +20,44 @@ export default function App() {
         <Routes>
           <Route exact path="/blog/" element={<Home />} />
           <Route path="/blog/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/blog/signup" element={<Signup />} />
           <Route path="/blog/:titleUrl" element={<Blog />} />
           <Route
-            path="/dashboard"
+            path="/blog/dashboard"
             element={
-              <RequireAuth loginPath={"/login"}>
+              <RequireAuth loginPath={"/blog/login"}>
                 <Dashboard />
               </RequireAuth>
             }
           />
           <Route
-            path="/new"
+            path="/blog/new"
             element={
-              <RequireAuth loginPath={"/login"}>
+              <RequireAuth loginPath={"/blog/login"}>
                 <New />
               </RequireAuth>
             }
           />
           <Route
-            path="/update/:titleUrl"
+            path="/blog/update/:titleUrl"
             element={
-              <RequireAuth loginPath={"/login"}>
+              <RequireAuth loginPath={"/blog/login"}>
                 <New />
               </RequireAuth>
             }
           />
           <Route
-            path="/profile"
+            path="/blog/profile"
             element={
-              <RequireAuth loginPath={"/login"}>
+              <RequireAuth loginPath={"/blog/login"}>
                 <Profile />
               </RequireAuth>
             }
           />
           <Route
-            path="/change-password"
+            path="/blog/change-password"
             element={
-              <RequireAuth loginPath={"/login"}>
+              <RequireAuth loginPath={"/blog/login"}>
                 <ChangePassword />
               </RequireAuth>
             }
