@@ -30,7 +30,7 @@ export default function Comment({ comments, handleDeleteComment }) {
         <div className="flex space-x-2">
           <div className="">
             <img
-              className="h-12 w-12 rounded-full"
+              className="h-8 rounded-full"
               src={comment.authorId.avatar}
               alt="avatar"
             />
@@ -38,12 +38,12 @@ export default function Comment({ comments, handleDeleteComment }) {
           <div className="flex justify-between  border w-full rounded-md p-3">
             <div>
               <div className="flex items-center space-x-1">
-                <h2>{comment.authorId.firstName}</h2>
-                <h2 className="text-gray-500">
-                  {dateFormat(comment.date, "d mmm yy")}
-                </h2>
+                <h1 className="text-sm">{comment.authorId.firstName}</h1>
+                <small className="text-gray-500">
+                  {dateFormat(comment.date, "mmm yy")}
+                </small>
               </div>
-              <p className="text-lg py-2">{comment.body}</p>
+              <p className="text-base py-2">{comment.body}</p>
             </div>
             <div>
               {auth()?._id === comment.authorId._id && (

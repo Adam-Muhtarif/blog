@@ -65,7 +65,7 @@ export default function Signup() {
   useEffect(() => firstNameRef.current.focus(), []);
   return (
     <form onSubmit={(e) => handleSignUp(e)}>
-      <div className="bg-white m-auto mt-10 rounded-md p-10 w-[650px] ">
+      <div className="bg-white m-auto mt-10 rounded-md p-10 md:w-fit">
         <div className="text-center">
           <h3 className="font-bold text-2xl">Welcome to DEV Community 👩‍💻👨‍💻</h3>
           <p>

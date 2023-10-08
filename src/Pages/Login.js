@@ -51,7 +51,7 @@ export default function Login() {
 
   return (
     <form onSubmit={(e) => handleLogin(e)}>
-      <div className="bg-white m-auto mt-10 rounded-md p-10 w-[650px] ">
+      <div className="bg-white m-auto mt-10 rounded-md p-10 md:w-max">
         <div className="text-center">
           <h3 className="font-bold text-2xl">Welcome to DEV Community 👩‍💻👨‍💻</h3>
           <p>

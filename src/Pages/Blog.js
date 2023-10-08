@@ -73,7 +73,7 @@ export default function Blog() {
 
   if (loading) return <BlogLoader />;
   return (
-    <div className="flex my-5 space-x-5">
+    <div className="flex flex-col md:flex-row my-2 gap-2">
       <BlogContent
         handleDeleteComment={handleDeleteComment}
         handleMakeComment={handleMakeComment}

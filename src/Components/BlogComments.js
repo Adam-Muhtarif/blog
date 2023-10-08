@@ -21,7 +21,7 @@ export default function BlogComments({
           <div className="flex space-x-2">
             <div className="h-12 w-12">
               <img
-                className="rounded-full"
+                className="rounded-full h-8"
                 src={auth()?.avatar}
                 alt="avatar"
               />
