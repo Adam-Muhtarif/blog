@@ -13,11 +13,11 @@ export default function Header() {
   }
 
   return (
-    <div className="flex justify-between bg-white py-4 px-12 md:px-24 2xl:px-72 border-b-2  relative">
+    <div className="flex justify-between bg-white py-2 px-4 md:px-2 xl:px-36 2xl:px-72 border-b-2 relative">
       <div className="flex items-center">
         <Link to="/" onClick={isMenuOpen && toggleMenu}>
           <img
-            className="h-9"
+            className="h-10"
             src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
             alt="logo"
           />
@@ -33,23 +33,25 @@ export default function Header() {
       </button>
 
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 px-12 bg-transparent">
+        <div className="md:hidden absolute top-full left-0 right-0 md:px-2 bg-transparent">
           <div className="bg-white border-b-2">
             {isAuthenticated() ? (
-              <div className="flex items-center justify-between py-3 px-4">
-                <Link to="/new">
-                  <button className="border border-blue-700 py-1.5 px-2.5 rounded-md text-blue-700">
-                    Post Blog
+              <div className="flex flex-col gap-2 justify-between py-3 px-4">
+                <Link to="/dashboard">
+                  <button
+                    className="border border-blue-700 py-1.5 px-2.5 rounded-md text-blue-700"
+                    onClick={toggleMenu}
+                  >
+                    Profile
                   </button>
                 </Link>
-                <Link to="/dashboard">
-                  <div className="h-10 w-10">
-                    <img
-                      className="rounded-full"
-                      src={auth().avatar}
-                      alt="avatar"
-                    />
-                  </div>
+                <Link to="/new">
+                  <button
+                    className="border border-blue-700 py-1.5 px-2.5 rounded-md text-blue-700"
+                    onClick={toggleMenu}
+                  >
+                    Post Blog
+                  </button>
                 </Link>
               </div>
             ) : (

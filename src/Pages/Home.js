@@ -31,22 +31,19 @@ export default function Home() {
 
   if (loading) return <HomeLoader />;
   return (
-    <div className="flex justify-between space-x-8 mt-5">
+    <div className="flex mt-3 sm:gap-2 md:gap-4 ">
       {!isAuthenticated() && <SideBar />}
       <div className="flex-1">
         {blogs.map((blog, i) => (
           <BlogCard key={i} blog={blog} />
         ))}
       </div>
-      <div className="w-[25%]">
-        <div className="bg-slate-50 py-2 rounded-md">
-          <div className="flex justify-between items-center px-5 py-2">
-            <h3 className="font-bold">Listings</h3>
-            <small className="text-blue-700 font-semibold">See all</small>
-          </div>
-          <ListCard />
-          <ListCard />
-        </div>
+      <div className="hidden lg:block bg-white w-[25%] px-4 py-2 h-fit">
+        <h1 className="mb-2 font-semibold text-lg">#discuss</h1>
+        <ListCard />
+        <ListCard />
+        <ListCard />
+        <ListCard />
       </div>
     </div>
   );

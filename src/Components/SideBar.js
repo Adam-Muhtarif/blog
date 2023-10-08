@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 function SideBar() {
   return (
-    <div className="h-fit w-[21%] ">
+    <div className="h-fit w-1/4 hidden md:block">
       <div className="bg-white rounded-md border px-5 pt-2 pb-8">
-        <h2 className="font-bold text-xl">
-          DEV community 👨‍💻👩‍💻 is a community of 988,949 amazing developers
+        <h2 className="font-semibold text-xl">
+          DEV community is a community of 988,949 amazing developers
         </h2>
         <p className="py-2">
           We're a place where coders share, stay up-to-date and grow their
@@ -22,32 +22,32 @@ function SideBar() {
           </Link>
         </div>
       </div>
-      <div className="py-5 space-y-1.5">
+      <div className="py-5 space-y-1.5 px-5">
         <div className="flex items-center">
           <div className="w-6">🏠</div>
           <Link to="/">
-            <h3 className="text-sm">Home</h3>
+            <h3 className="text-md">Home</h3>
           </Link>
         </div>
         <div className="flex items-center">
           <div className="w-6">📃</div>
-          <h3 className="text-sm">Listings</h3>
+          <h3 className="text-md">Listings</h3>
         </div>
         <div className="flex items-center">
           <div className="w-6">🎙</div>
-          <h3 className="text-sm">Podcast</h3>
+          <h3 className="text-md">Podcast</h3>
         </div>
         <div className="flex items-center">
           <div className="w-6">📽</div>
-          <h3 className="text-sm">Videos</h3>
+          <h3 className="text-md">Videos</h3>
         </div>
         <div className="flex items-center">
           <div className="w-6">💡</div>
-          <h3 className="text-sm">FAQ</h3>
+          <h3 className="text-md">FAQ</h3>
         </div>
         <div className="flex items-center">
           <div className="w-6">❤</div>
-          <h3 className="text-sm">Sponsers</h3>
+          <h3 className="text-md">Sponsers</h3>
         </div>
       </div>
     </div>
