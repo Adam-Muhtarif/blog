@@ -77,7 +77,7 @@ export default function Profile() {
 
   return (
     <form onSubmit={(e) => handleSaveConfirmation(e)}>
-      <div className="m-auto  mt-5 p-5 bg-white rounded-md">
+      <div className="mx-12 md:mx-44 mt-5 p-5 bg-white rounded-md">
         <h2 className="mb-8 text-center font-bold text-2xl">Edit profile</h2>
         <div className="my-2 space-y-2">
           <span>First Name</span>

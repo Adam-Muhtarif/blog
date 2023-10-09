@@ -7,23 +7,23 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="m-auto w-3/5">
+    <div className="mx-2 md:mx-12">
       <div className="py-5">
         <h3 className="font-bold text-3xl">Dashboard</h3>
       </div>
       <div className="flex space-x-2 pb-4">
-        <Link to={"/profile"} className="flex-1">
-          <button className="w-full border border-blue-500 p-3 text-blue-500 rounded-md">
+        <Link to={"/profile"} className="flex-grow">
+          <button className="w-full border border-blue-500 p-2 md:p-3 text-blue-500 rounded-md hover:bg-[#3b49df] hover:text-white transition-colors">
             Edit profile
           </button>
         </Link>
-        <Link to="/change-password" className="flex-1">
-          <button className="w-full  border border-blue-500 p-3 text-blue-500 rounded-md">
+        <Link to="/change-password" className="flex-grow">
+          <button className="w-full border border-blue-500 p-2 md:p-3 text-blue-500 rounded-md hover:bg-[#3b49df] hover:text-white transition-colors">
             Change password
           </button>
         </Link>
         <button
-          className="flex-1 border border-blue-500 p-3 text-blue-500 rounded-md"
+          className="flex-grow border border-blue-500 p-2 md:p-3 text-blue-500 rounded-md hover:bg-[#3b49df] hover:text-white transition-colors"
           onClick={() => {
             signOut();
             navigate("/");

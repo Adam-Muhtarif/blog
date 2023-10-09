@@ -1,9 +1,9 @@
 import ContentLoader from "react-content-loader";
 
 const BlogLoader = (props) => (
-  <div className="flex my-5 space-x-5">
+  <div className="flex flex-col md:flex-row gap-8 md:gap-0 my-5 space-x-5">
     <ContentLoader
-      className="flex-1  w-full"
+      className="flex-grow md:ml-12"
       viewBox="0 0 1020 850"
       backgroundColor={"#ddd"}
       foregroundColor={"#eee"}

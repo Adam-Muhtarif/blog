@@ -40,7 +40,7 @@ export default function Header() {
                 <div className="flex flex-col gap-2 justify-between py-3 px-4">
                   <Link to="/dashboard">
                     <button
-                      className="border hover:bg-[#3b49df] transition-colors border-blue-700 py-1.5 px-2.5 rounded-md text-blue-700"
+                      className="py-1.5 px-2.5 rounded-md text-blue-700 hover:bg-[#e2e3f3] transition-colors"
                       onClick={toggleMenu}
                     >
                       Profile
@@ -48,7 +48,7 @@ export default function Header() {
                   </Link>
                   <Link to="/new">
                     <button
-                      className="border hover:bg-[#3b49df] transition-colors border-blue-700 py-1.5 px-2.5 rounded-md text-blue-700"
+                      className="border hover:bg-[#3b49df] hover:text-white transition-colors border-blue-700 py-1.5 px-2.5 rounded-md text-blue-700"
                       onClick={toggleMenu}
                     >
                       Post Blog
@@ -58,7 +58,10 @@ export default function Header() {
               ) : (
                 <div className="flex flex-col gap-2 py-3 px-4">
                   <Link to="/login">
-                    <button className="mr-3" onClick={toggleMenu}>
+                    <button
+                      className="mr-3 py-1.5 px-2.5 hover:bg-[#e2e3f3] transition-colors rounded-md"
+                      onClick={toggleMenu}
+                    >
                       Log in
                     </button>
                   </Link>
@@ -97,7 +100,7 @@ export default function Header() {
           ) : (
             <div className="flex items-center">
               <Link to="/login">
-                <button className="py-1.5 px-2.5 rounded-md hover:bg-[#e2e3f3] transition-colors">
+                <button className="py-1.5 px-2.5 mr-2 rounded-md hover:bg-[#e2e3f3] transition-colors">
                   Log in
                 </button>
               </Link>

@@ -1,7 +1,7 @@
 import ContentLoader from "react-content-loader";
 
 const UpdateBlogLoader = (props) => (
-  <div className="mx-auto mt-5 w-full lg:w-1/2 sm:w-full">
+  <div className="mx-auto mt-14 w-full lg:w-1/2 sm:w-full">
     <ContentLoader
       backgroundColor={"#ddd"}
       foregroundColor={"#eee"}

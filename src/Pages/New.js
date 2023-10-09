@@ -106,7 +106,7 @@ export default function New() {
   if (loading) return <UpdateBlogLoader />;
   return (
     <form onSubmit={(e) => handlePostConfirmation(e)}>
-      <div className="m-auto  mt-5 p-5 bg-white rounded-md">
+      <div className="md:mx-32 mt-5 p-5 bg-white rounded-md overflow-hidden">
         <h2 className="mb-8 text-center font-bold text-2xl">Blog post</h2>
         <input
           type="file"
@@ -115,7 +115,7 @@ export default function New() {
             handleAvatarChange(e.target.files[0]);
           }}
         />
-        <img className="mx-auto lg:h-60" src={selectedImage || inputs.image} alt="" />
+        <img className="max-h-72" src={selectedImage || inputs.image} alt="" />
         <div className="my-2">
           <input
             defaultValue={inputs.title}

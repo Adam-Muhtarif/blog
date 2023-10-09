@@ -63,9 +63,9 @@ export default function ChangePassword() {
 
   return (
     <form onSubmit={(e) => handleChangeConfirmation(e)}>
-      <div className="m-auto w-1/2 mt-5 p-5 bg-white rounded-md">
+      <div className="mx-12 md:mx-44 mt-5 p-5 bg-white rounded-md">
         <h2 className="mb-8 text-center font-bold text-2xl">Change Password</h2>
-        <p className="text-gray-500 pb-4">
+        <p className="text-gray-500 pb-4 text-center">
           Make sure your new password is a strong password. Do mix letters and
           special characters
         </p>
