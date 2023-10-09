@@ -10,7 +10,7 @@ export default function BlogCard({ blog }) {
           <img className="rounded-t-md" src={blog.image} alt="" />
         </div>
         <div className="flex space-x-3 p-6">
-          <div className="h-12 w-12">
+          <div className="h-10 w-10">
             <img
               className="rounded-full"
               src={blog.author.avatar}
@@ -19,9 +19,11 @@ export default function BlogCard({ blog }) {
           </div>
           <div className="space-y-1.5">
             <div className="leading-4">
-              <h4>{blog.author.firstName}</h4>
-              <small className="text-gray-400">
-                {dateformat(blog.postDate, "d mmm yy")}
+              <h4 className="hover:bg-[#f1f1f1] w-fit p-1 font-light">
+                {blog.author.firstName} {blog.author.secondName}
+              </h4>
+              <small className="text-gray-500 text-xs">
+                {dateformat(blog.postDate, "mmm yy")}
               </small>
             </div>
             <div>

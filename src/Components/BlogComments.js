@@ -14,8 +14,8 @@ export default function BlogComments({
   });
 
   return (
-    <div className="border-t py-5 px-16">
-      <h1 className="font-bold text-2xl">Top comment(s)</h1>
+    <div className="border-t py-5 p-2 md:p-7">
+      <h1 className="font-semibold text-xl">Top comment(s)</h1>
       {auth() && auth()._id !== blogAuthor._id && (
         <div className="py-5">
           <div className="flex space-x-2">

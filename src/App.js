@@ -16,7 +16,7 @@ export default function App() {
   return (
     <div>
       <Header />
-      <div className="px-4 md:px-2 xl:px-36 2xl:px-72">
+      <div className="pt-14 lg:pt-16 px-4 md:px-2 xl:px-36 2xl:px-72">
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

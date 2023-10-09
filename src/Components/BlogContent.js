@@ -83,13 +83,13 @@ export default function BlogContent({
         </div>
       </aside>
       <div className="flex-l">
-        <div className="bg-white rounded-md">
-          <div>
+        <div className="bg-white rounded-md ">
+          <div className="">
             <img className="rounded-t-md" src={blog.image} alt="" />
           </div>
-          <div className="py-5 px-16">
-            <div className="flex items-center space-x-3 py-3">
-              <div className="h-12 w-12">
+          <div className="p-2 md:p-7">
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="h-10 w-10">
                 <img
                   className="rounded-full"
                   src={blog.author.avatar}
@@ -97,13 +97,16 @@ export default function BlogContent({
                 />
               </div>
               <div className="leading-4">
-                <h4>{blog.author.firstName}</h4>
+                <h4>
+                  {blog.author.firstName} {blog.author.secondName}
+                </h4>
                 <small className="text-gray-400">
+                  Posted on
                   {dateFormat(blog.postDate, "d mmm yy")}
                 </small>
               </div>
             </div>
-            <h3 className="font-bold text-5xl hover:text-sky-600">
+            <h3 className="font-semibold text-3xl md:text-4xl lg:text-5xl hover:text-sky-600">
               {blog.title}
             </h3>
             <div className="py-10">{blog.body}</div>
