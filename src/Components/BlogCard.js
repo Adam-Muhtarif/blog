@@ -9,7 +9,7 @@ export default function BlogCard({ blog }) {
         <div>
           <img className="rounded-t-md" src={blog.image} alt="" />
         </div>
-        <div className="flex space-x-3 p-6">
+        <div className="flex space-x-1 p-3 md:p-6 pb-6">
           <div className="h-10 w-10">
             <img
               className="rounded-full"
@@ -22,12 +22,12 @@ export default function BlogCard({ blog }) {
               <h4 className="hover:bg-[#f1f1f1] w-fit p-1 font-light">
                 {blog.author.firstName} {blog.author.secondName}
               </h4>
-              <small className="text-gray-500 text-xs">
+              <small className="text-gray-500 text-xs pl-1">
                 {dateformat(blog.postDate, "mmm yy")}
               </small>
             </div>
             <div>
-              <h3 className="font-bold text-2xl hover:text-sky-600">
+              <h3 className="font-semibold text-2xl sm:text-3xl hover:text-sky-600">
                 {blog.title}
               </h3>
             </div>
